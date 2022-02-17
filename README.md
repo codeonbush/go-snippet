@@ -1,2 +1,2 @@
 # go-snippet
-go-snippet
+go-snippet init
