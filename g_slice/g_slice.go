@@ -24,9 +24,9 @@ func main() {
 func value() {
 	var arr = [...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 	var slice0 = arr[2:8]
-	var slice1 = arr[0:6]         //可以简写为 var slice []int = arr[:end]
-	var slice2 = arr[5:10]        //可以简写为 var slice[]int = arr[start:]
-	var slice3 = arr[0:len(arr)]  //var slice []int = arr[:]
+	var slice1 = arr[0:6]         //可以简写为 var g_slice []int = arr[:end]
+	var slice2 = arr[5:10]        //可以简写为 var g_slice[]int = arr[start:]
+	var slice3 = arr[0:len(arr)]  //var g_slice []int = arr[:]
 	var slice4 = arr[:len(arr)-1] //去掉切片的最后一个元素
 	fmt.Printf("全局变量：arr %v\n", arr)
 	fmt.Printf("全局变量：slice0 %v\n", slice0)
@@ -68,7 +68,7 @@ func arrAndSlice() {
 	*p += 100
 	fmt.Println(ss)
 
-	//向 slice 尾部添加数据，返回新的 slice 对象。
+	//向 g_slice 尾部添加数据，返回新的 g_slice 对象。
 	s1 := make([]int, 510, 510)
 	fmt.Printf("%p\n", &s1)
 	s2 := append(s1, 1)
@@ -79,29 +79,29 @@ func arrAndSlice() {
 
 	//切片resize
 	var a = []int{0, 1, 2, 3, 4, 5, 6}
-	fmt.Printf("slice a : %v , len(a) : %v, cap(a) : %v\n", a, len(a), cap(a))
+	fmt.Printf("g_slice a : %v , len(a) : %v, cap(a) : %v\n", a, len(a), cap(a))
 	b := a[1:4]
-	fmt.Printf("slice b : %v , len(b) : %v, cap(b) : %v\n", b, len(b), cap(b))
+	fmt.Printf("g_slice b : %v , len(b) : %v, cap(b) : %v\n", b, len(b), cap(b))
 	d := b[0:5] //截取时考虑底层数组是否越界，如果通过索引直接取值则考虑切片是否越界
-	fmt.Printf("slice c : %v , len(c) : %v, cap(c) : %v\n", d, len(d), cap(d))
+	fmt.Printf("g_slice c : %v , len(c) : %v, cap(c) : %v\n", d, len(d), cap(d))
 	return
 }
 
 func copySlice() {
-	//切片拷贝，copy ：函数 copy 在两个 slice 间复制数据，复制长度以 len 小的为准。两个 slice 可指向同一底层数组，允许元素区间重叠。
+	//切片拷贝，copy ：函数 copy 在两个 g_slice 间复制数据，复制长度以 len 小的为准。两个 g_slice 可指向同一底层数组，允许元素区间重叠。
 	s1 := []int{1, 2, 3, 4, 5}
-	fmt.Printf("slice s1 : %v\n", s1)
+	fmt.Printf("g_slice s1 : %v\n", s1)
 	s2 := make([]int, 10)
-	fmt.Printf("slice s2 : %v\n", s2)
+	fmt.Printf("g_slice s2 : %v\n", s2)
 	copy(s2, s1)
-	fmt.Printf("copied slice s1 : %v\n", s1)
-	fmt.Printf("copied slice s2 : %v\n", s2)
+	fmt.Printf("copied g_slice s1 : %v\n", s1)
+	fmt.Printf("copied g_slice s2 : %v\n", s2)
 	s3 := []int{1, 2, 3}
-	fmt.Printf("slice s3 : %v\n", s3)
+	fmt.Printf("g_slice s3 : %v\n", s3)
 	s3 = append(s3, s2...)
-	fmt.Printf("appended slice s3 : %v\n", s3)
+	fmt.Printf("appended g_slice s3 : %v\n", s3)
 	s3 = append(s3, 4, 5, 6)
-	fmt.Printf("last slice s3 : %v\n", s3)
+	fmt.Printf("last g_slice s3 : %v\n", s3)
 }
 
 //原切片基础上进行切片

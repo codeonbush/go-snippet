@@ -17,10 +17,17 @@ func main() {
 	//go func() {println(<-c)}()
 
 	// 带缓存的chan在单个协程中不会阻塞,超过缓冲区大小阻塞
-	//c := make(chan int, 1)
-	//c <- 1  //在这里阻塞
-	//c <- 2
-	//println(<- c)
+	c := make(chan int, 1)
+	//go func() {
+	//	for {
+	//		fmt.Println(len(c))
+	//		time.Sleep(time.Second)
+	//	}
+	//
+	//}()
+	c <- 1
+	c <- 2 //在这里阻塞
+	println(<-c)
 
 	// chan中没有数据继续读取造成死锁
 	//c := make(chan int, 1)
@@ -58,7 +65,7 @@ func main() {
 	//out := make(chan int)
 	//out <- 2
 	//go f1(out)
-	ProductAndConsumer()
+	//ProductAndConsumer()
 }
 
 // select可以同时轮询多个chan，不会造成阻塞
