@@ -11,22 +11,22 @@ func main() {
 	value()
 
 	checkNil()
-
-	arrAndSlice()
-
-	copySlice()
-
-	testLastChars(lastNumsBySlice)
-	testLastChars(lastNumsBySlice)
+	//
+	//arrAndSlice()
+	//
+	//copySlice()
+	//
+	//testLastChars(lastNumsBySlice)
+	//testLastChars(lastNumsBySlice)
 }
 
-//切片下标取值，下标前闭后开
+//1. 切片下标取值，下标前闭后开
 func value() {
 	var arr = [...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 	var slice0 = arr[2:8]
 	var slice1 = arr[0:6]         //可以简写为 var g_slice []int = arr[:end]
 	var slice2 = arr[5:10]        //可以简写为 var g_slice[]int = arr[start:]
-	var slice3 = arr[0:len(arr)]  //var g_slice []int = arr[:]
+	var slice3 = arr[0:]          //var g_slice []int = arr[:]
 	var slice4 = arr[:len(arr)-1] //去掉切片的最后一个元素
 	fmt.Printf("全局变量：arr %v\n", arr)
 	fmt.Printf("全局变量：slice0 %v\n", slice0)
@@ -40,11 +40,24 @@ func value() {
 
 //2. 未初始化的slice为nil
 func checkNil() {
+
 	var s1 []int
 	s2 := []int{}
-	s3 := make([]int, 0)
+	//make第二个参数是长度，缺省第三个参数时，make（类型，长度）
+	//容量是隐形的，只有扩容才会用到，如果长度大于0，则初始化为对应个数的0值
+	s3 := make([]int, 0, 8)
+	s4 := make([]int, 8, 8)
+	s5 := make([]int, 8)
+	s6 := make([][]int, 8)
 	fmt.Println(s1 == nil, s2 == nil, s3 == nil)
 	fmt.Println(s1, s2, s3)
+	fmt.Println(cap(s1), cap(s2), cap(s3))
+	s3 = append(s3, 1)
+	s4 = append(s4, 1)
+	fmt.Println("s3:make([]int, 0, 8)", s3)
+	fmt.Println("s4:make([]int, 8, 8)", s4)
+	fmt.Println("最常用：s5:make([]int, 8)", s5)
+	fmt.Println("s6:make([][]int, 8)", s6)
 	fmt.Printf("-----------------------------------\n")
 	return
 }
