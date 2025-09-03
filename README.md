@@ -1,2 +1,2 @@
 # go-snippet
-go-snippet
+Some test of golang.
